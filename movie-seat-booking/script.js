@@ -7,6 +7,13 @@ const movieSelect = document.getElementById('movie');
 
 let ticketPrice = +movieSelect.value; // + changes the string to a number (like parseInt)
 
+// Save selected Movie index & price
+function setMovieData(movieIndex, moviePrice) {
+    localStorage.setItem('selectecMovieIndex', movieIndex);
+    localStorage.setItem('selectedMoviePrice', moviePrice);
+}
+
+
 // update total and count
 function updateSelectedCount() {
     const selectedSeats = document.querySelectorAll('.row .seat.selected'); // will store a NodeList of the selected seats
@@ -43,6 +50,9 @@ container.addEventListener('click', (e) => {
 // Movie select event
 movieSelect.addEventListener('change', (e) => {
     ticketPrice = +e.target.value;
+
+    setMovieData(e.target.selectedIndex, e.target.value);
+
     updateSelectedCount();
 });
 
