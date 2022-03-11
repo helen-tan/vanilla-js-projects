@@ -11,6 +11,18 @@ let ticketPrice = +movieSelect.value; // + changes the string to a number (like 
 function updateSelectedCount() {
     const selectedSeats = document.querySelectorAll('.row .seat.selected'); // will store a NodeList of the selected seats
 
+    // selectedSeats is a NodeList of divs, which we cannot store in localStorage
+    // We need to create an array of indexes
+
+    // Convert the NodeLists of selected seats into a regular array
+    // Map through array
+    // Return a new array of indexes
+    const seatsIndex = [...selectedSeats].map((seat) => {
+        return [...seats].indexOf(seat);
+    });
+    // Save selected seats arr to localStorage
+    localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
+
     const selectedSeatsCount = selectedSeats.length;
     
     count.innerText = selectedSeatsCount;
