@@ -5,13 +5,15 @@ const count = document.getElementById('count');
 const total = document.getElementById('total');
 const movieSelect = document.getElementById('movie');
 
-let ticketPrice = +movieSelect.value; // + changes the string to a number (like parseInt)
-
 populateUI();
+
+let ticketPrice = +movieSelect.value; // + changes the string to a number (like parseInt)
+console.log(ticketPrice);
+
 
 // Save selected Movie index & price
 function setMovieData(movieIndex, moviePrice) {
-    localStorage.setItem('selectecMovieIndex', movieIndex);
+    localStorage.setItem('selectedMovieIndex', movieIndex);
     localStorage.setItem('selectedMoviePrice', moviePrice);
 }
 
@@ -31,6 +33,7 @@ function updateSelectedCount() {
     // Save selected seats arr to localStorage
     localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
 
+    // update UI on selected seat count & ticket price
     const selectedSeatsCount = selectedSeats.length;
     
     count.innerText = selectedSeatsCount;
@@ -43,10 +46,16 @@ function populateUI() {
     
     if(selectedSeats !== null && selectedSeats.length > 0){   // if there are selected seats saved
         seats.forEach((seat, index) => {
-            if(selectedSeats.indexOf(index) > -1){ // if its in there
+            if(selectedSeats.indexOf(index) > -1){ // check every seat to see if it is one of the seats in the saved array
                 seat.classList.add('selected');
             }
         });
+    }
+
+    const selectedMovieIndex = localStorage.getItem('selectedMovieIndex');
+
+    if(selectedMovieIndex !== null){
+        movieSelect.selectedIndex = selectedMovieIndex;
     }
 }
 
@@ -71,4 +80,6 @@ movieSelect.addEventListener('change', (e) => {
     updateSelectedCount();
 });
 
+// Initial count and total set
+updateSelectedCount();
 
