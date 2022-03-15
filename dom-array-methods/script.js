@@ -53,3 +53,6 @@ function formatMoney(number) {
     return '$' + (number).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');  // 12,345.67
 }
 
+// Event Listeners
+addUserBtn.addEventListener('click', getRandomUser);
+
