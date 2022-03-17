@@ -16,6 +16,7 @@ let selectedWord = words[Math.floor(Math.random() * words.length)];
 const correctLetters = [];
 const wrongLetters = [];
 
+
 // Show a random hidden word
 function displayWord(){
     wordEl.innerHTML = `
@@ -98,6 +99,23 @@ window.addEventListener('keydown', e => {
             }
         }
     }
+});
+
+// Restart Game and play again 
+playAgainBtn.addEventListener('click', () => {
+    // Empty arrays
+    correctLetters.splice(0);
+    wrongLetters.splice(0);
+
+    selectedWord = words[Math.floor(Math.random() * words.length)];
+
+    displayWord();
+
+    // Cleanup hangman figure
+    updateWrongLettersEl();
+
+    // Hide popup
+    popup.style.display = 'none';
 });
 
 displayWord();
