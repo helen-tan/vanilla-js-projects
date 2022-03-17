@@ -56,7 +56,11 @@ function updateWrongLettersEl(){
         }
     });
 
-    
+    // 3. Check if the whole figure is completed - game over
+    if(wrongLetters.length === figureParts.length){
+        finalMessage.innerText = 'Unfortunately, you lost :(';
+        popup.style.display = 'flex';
+    }
     
 }
 
