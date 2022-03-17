@@ -13,7 +13,7 @@ const words = ['application', 'programming', 'interface', 'wizard'];
 
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
-const correctLetter = ['r'];
+const correctLetters = [];
 const wrongLetters = [];
 
 // Show a random hidden word
@@ -23,7 +23,7 @@ function displayWord(){
             .split('')
             .map(letter => `
                 <span class="letter">
-                    ${correctLetter.includes(letter) ? letter : ''}
+                    ${correctLetters.includes(letter) ? letter : ''}
                 </span>
             `).join('')
         }
@@ -40,6 +40,15 @@ function displayWord(){
 // Update the wrong letters
 function updateWrongLettersEl(){
     console.log('Update wrong');
+}
+
+// Show notifcation
+function showNotification() {
+    notification.classList.add('show');
+
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 2000);
 }
 
 // Keydown letter press
