@@ -4,6 +4,7 @@ const playAgainBtn = document.getElementById('play-button');
 const popup = document.getElementById('popup-container');
 const notification = document.getElementById('notification-container');
 const finalMessage = document.getElementById('final-message');
+const finalMessageRevealWord = document.getElementById('final-message-reveal-word');
 
 // Figure parts
 const figureParts = document.querySelectorAll('.figure-part');
@@ -60,6 +61,7 @@ function updateWrongLettersEl(){
     // 3. Check if the whole figure is completed - game over
     if(wrongLetters.length === figureParts.length){
         finalMessage.innerText = 'Unfortunately, you lost :(';
+        finalMessageRevealWord.innerText = `The word was: ${selectedWord}.`;
         popup.style.display = 'flex';
     }
     
