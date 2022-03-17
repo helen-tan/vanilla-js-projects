@@ -39,7 +39,25 @@ function displayWord(){
 
 // Update the wrong letters
 function updateWrongLettersEl(){
-    console.log('Update wrong');
+    // 1. Show the wrong letter in the UI
+    wrongLettersEl.innerHTML = `
+        ${wrongLetters.length > 0 ? '<p>Wrong</p>' : ''}
+        ${wrongLetters.map(letter => `<span>${letter}</span>`)}
+    `;
+    
+    // 2. Add a figure part in the hangman
+    figureParts.forEach((part, index) => {
+        const errorCount = wrongLetters.length;
+
+        if(index < errorCount){
+            part.style.display = 'block';
+        } else {
+            part.style.display = 'none';
+        }
+    });
+
+    
+    
 }
 
 // Show notifcation
