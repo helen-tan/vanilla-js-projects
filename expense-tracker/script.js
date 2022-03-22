@@ -6,14 +6,19 @@ const form = document.getElementById('form');
 const text = document.getElementById('text');
 const amount = document.getElementById('amount');
 
-const dummyTransactions = [
-    { id: 1, text: 'Flower', amount: -20 },
-    { id: 2, text: 'Salary', amount: 300 },
-    { id: 3, text: 'Book', amount: -10 },
-    { id: 4, text: 'Camera', amount: 150 }
-];
+// const dummyTransactions = [
+//    { id: 1, text: 'Flower', amount: -20 },
+//    { id: 2, text: 'Salary', amount: 300 },
+//    { id: 3, text: 'Book', amount: -10 },
+//   { id: 4, text: 'Camera', amount: 150 }
+// ];
 
-let transactions = dummyTransactions;
+// let transactions = dummyTransactions;
+
+const localStorageTransactions = JSON.parse(localStorage.getItem('transactions'));
+
+let transactions = localStorage.getItem('transactions') !== null ? 
+    localStorageTransactions : [];
 
 // Add transaction
 function addTransaction(e) {
@@ -31,6 +36,9 @@ function addTransaction(e) {
 
         addTransactionDOM(transaction);
         updateValues();
+        
+        // Update local storage
+        updateLocalStorage();
 
         // clear input
         text.value = '';
@@ -81,10 +89,18 @@ function updateValues() {
     money_minus.innerText = `$${expense}`;
 }
 
+// Update local storage transactions
+function updateLocalStorage() {
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+}
+
 // Remove transaction by ID
 function removeTransaction(id) {
     // From the transactions arr, filter out the ones that do not have the specified id
     transactions = transactions.filter(transaction => transaction.id !== id);
+
+    // Update local storage
+    updateLocalStorage();
 
     init();
 }
