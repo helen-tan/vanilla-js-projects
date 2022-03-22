@@ -54,7 +54,7 @@ function addTransactionDOM(transaction) {
     item.classList.add(transaction.amount < 0 ? 'minus' : 'plus');
     item.innerHTML = `
         ${transaction.text} <span>${sign}${Math.abs(transaction.amount)}</span>
-        <button class="delete-btn">x</button>
+        <button class="delete-btn" onclick="removeTransaction(${transaction.id})">x</button>
     `;
 
     list.appendChild(item);
@@ -79,6 +79,14 @@ function updateValues() {
     balance.innerText = `$${total}`;
     money_plus.innerText = `$${income}`;
     money_minus.innerText = `$${expense}`;
+}
+
+// Remove transaction by ID
+function removeTransaction(id) {
+    // From the transactions arr, filter out the ones that do not have the specified id
+    transactions = transactions.filter(transaction => transaction.id !== id);
+
+    init();
 }
 
 // Init
