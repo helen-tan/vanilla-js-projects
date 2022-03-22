@@ -51,8 +51,23 @@ function pauseSong(){
 function prevSong() {
     songIndex--;
 
+    // If its the 1st song (index 0) and back btn is clicked (index becomes -ve), go to the last song
     if(songIndex < 0){
         songIndex = songs.length - 1;
+    }
+
+    loadSong(songs[songIndex]);
+
+    playSong();
+}
+
+// Next song
+function nextSong() {
+    songIndex++;
+
+    // If its the last song (index of songs.length - 1) and the next btn is clicked, go to the 1st song
+    if(songIndex > songs.length - 1){
+        songIndex = 0;
     }
 
     loadSong(songs[songIndex]);
