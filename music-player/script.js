@@ -36,6 +36,16 @@ function playSong(){
     audio.play();
 }
 
+// Pause song
+function pauseSong(){
+    musicContainer.classList.remove('play');
+
+    // Change pause icon to play icon
+    playBtn.querySelector('i.fas').classList.add('fa-play');
+    playBtn.querySelector('i.fas').classList.remove('fa-pause');
+
+    audio.pause();
+}
 
 
 // Event Listeners
