@@ -47,12 +47,32 @@ function showLoading() {
         }, 300);
 
     }, 1000);
+}
 
+// Filter posts by input
+function filterPosts(e) {
+    const term = e.target.value.toUpperCase();
+    const posts = document.querySelectorAll('.post'); // returns a NodeList
+
+    posts.forEach(post => {
+        // Get the text in a post's title
+        const title = post.querySelector('.post-title').innerText.toUpperCase();
+        // Get the text in a post's body
+        const body = post.querySelector('.post-body').innerText.toUpperCase();
+
+        if(title.indexOf(term) > 1 || body.indexOf(term) > -1 ){ // If there is a match on the title or body 
+            post.style.display = 'flex';
+        } else { // no match
+            post.style.display = 'none';
+        }
+    });
 }
 
 // Show initial posts
 showPosts();
 
+
+// Event Listeners
 window.addEventListener('scroll', () => {
     const { scrollTop, scrollHeight, clientHeight} = 
     document.documentElement;
@@ -62,3 +82,5 @@ window.addEventListener('scroll', () => {
         showLoading();
     }
 });
+
+filter.addEventListener('input', filterPosts);
