@@ -111,7 +111,15 @@ text.addEventListener('input', e => {
         // Clear input
         e.target.value = "";
 
-        time += 5;
+
+        if(difficulty === 'hard'){
+            time += 2;
+        } else if(difficulty === 'medium') {
+            time += 3;
+        } else {
+            time += 5;
+        }
+        
         updateTime();
     }
 });
