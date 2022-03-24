@@ -91,6 +91,7 @@ function gameOver() {
 addWordToDOM();
 
 // Event Listeners
+// Typing
 text.addEventListener('input', e => {
     const insertedText = e.target.value;
 
@@ -105,5 +106,10 @@ text.addEventListener('input', e => {
         time += 5;
         updateTime();
     }
+});
+
+// Settings btn click
+settingsBtn.addEventListener('click', () => {
+    settings.classList.toggle('hide');
 });
 
