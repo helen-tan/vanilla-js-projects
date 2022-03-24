@@ -41,6 +41,9 @@ let score = 0;
 // Init time
 let time = 10;
 
+// Focus on text on start
+text.focus();
+
 // Generate random word from words array
 function getRandomWord() {
     return words[Math.floor(Math.random() * words.length)];
