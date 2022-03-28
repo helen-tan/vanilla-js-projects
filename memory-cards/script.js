@@ -70,6 +70,14 @@ function createCard(data, index) {
     // Add cards to DOM;
     cardsEl.push(card);
     cardsContainer.appendChild(card);
+
+    // Update current card number
+    updateCurrentText();
+}
+
+// Show card page number
+function updateCurrentText() {
+    currentEl.innerText = `${currentActiveCard + 1 }/${cardsEl.length}`;
 }
 
 createCards();
