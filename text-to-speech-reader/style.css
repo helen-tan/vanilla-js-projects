@@ -59,6 +59,10 @@ select:focus {
     transition: all 1s ease-in;
 }
 
+.text-box.show {
+    transform: translate(-50%, 0);
+}
+
 .text-box select{
     background-color: darksalmon;
     border: 0;
