@@ -133,3 +133,20 @@ h1 button {
     font-size: 16px;
     color: #ddd;
 }
+
+.navigation {
+    display: flex;
+    margin: 20px 0;
+}
+
+.navigation .nav-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.navigation p {
+    margin: 0 25px;
+}
+    
