@@ -81,3 +81,22 @@ function updateCurrentText() {
 }
 
 createCards();
+
+
+// Event Listeners
+nextBtn.addEventListener('click', () => {
+    cardsEl[currentActiveCard].className = 'card left';
+
+    currentActiveCard = currentActiveCard + 1;
+
+    // When the cards are flipped to the end
+    if(currentActiveCard > cardsEl.length - 1) {
+        currentActiveCard = cardsEl.length - 1;
+    }
+
+    // Set the next card to active
+    cardsEl[currentActiveCard].className = 'card active';
+
+    // Update page counter
+    updateCurrentText();
+});
