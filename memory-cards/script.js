@@ -16,7 +16,11 @@ let currentActiveCard = 0;
 // Store DOM cards
 const cardsEl = [];
 
+// Store card data (in local storage)
+const cardsData = getCardsData(); // Returns an arr or empty arr 
+
 // Store hard-coded card data - Will eventually be from local storage
+/*
 const cardsData = [
     {
         question: 'What must a variable begin with?',
@@ -31,6 +35,7 @@ const cardsData = [
         answer: 'thisIsAVariable'
     }
 ];
+*/
 
 // Create all cards
 function createCards() {
@@ -80,10 +85,25 @@ function updateCurrentText() {
     currentEl.innerText = `${currentActiveCard + 1 }/${cardsEl.length}`;
 }
 
+// Get cards from local storage
+function getCardsData() {
+    const cards = JSON.parse(localStorage.getItem('cards'));
+    return cards === null ? [] : cards;
+}
+
+// Add card to local storage
+function setCardsData(cards) {
+    localStorage.setItem('cards', JSON.stringify(cards));
+    window.location.reload();
+}
+
 createCards();
 
 
+
+
 // Event Listeners
+// Next button
 nextBtn.addEventListener('click', () => {
     cardsEl[currentActiveCard].className = 'card left';
 
@@ -101,6 +121,7 @@ nextBtn.addEventListener('click', () => {
     updateCurrentText();
 });
 
+// Prev button
 prevBtn.addEventListener('click', () => {
     cardsEl[currentActiveCard].className = 'card right';
 
@@ -117,3 +138,40 @@ prevBtn.addEventListener('click', () => {
     // Update page counter
     updateCurrentText();
 });
+
+// Show add container
+showBtn.addEventListener('click', () => {
+    addContainer.classList.add('show');
+});
+
+// Hide add container
+hideBtn.addEventListener('click', () => {
+    addContainer.classList.remove('show');
+});
+
+// Add new card
+addCardBtn.addEventListener('click', () => {
+    const question = questionEl.value;
+    const answer = answerEl.value;
+    
+    if(question.trim() && answer.trim()) {
+        // Create new card object
+        const newCard = { question: question, 
+                          answer: answer };
+        // Same as: { question, answer }
+
+        createCard(newCard);
+
+        // Clear inputs
+        questionEl.value = '';
+        answerEl.value = '';
+        
+        // Remove add card container
+        addContainer.classList.remove('show');
+
+
+        cardsData.push(newCard);
+        setCardsData(cardsData);
+    }
+});
+
