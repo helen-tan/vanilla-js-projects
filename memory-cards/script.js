@@ -100,3 +100,20 @@ nextBtn.addEventListener('click', () => {
     // Update page counter
     updateCurrentText();
 });
+
+prevBtn.addEventListener('click', () => {
+    cardsEl[currentActiveCard].className = 'card right';
+
+    currentActiveCard = currentActiveCard - 1;
+
+    // When the cards are flipped to the end
+    if(currentActiveCard < 0) {
+        currentActiveCard = 0;
+    }
+
+    // Set the next card to active
+    cardsEl[currentActiveCard].className = 'card active';
+
+    // Update page counter
+    updateCurrentText();
+});
