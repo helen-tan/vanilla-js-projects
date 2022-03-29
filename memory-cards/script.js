@@ -9,6 +9,7 @@ const answerEl = document.getElementById('answer');
 const addCardBtn = document.getElementById('add-card');
 const clearBtn = document.getElementById('clear');
 const addContainer = document.getElementById('add-container');
+const deleteBtn = document.getElementById('delete');
 
 // Keep track of current card
 let currentActiveCard = 0;
@@ -185,5 +186,24 @@ clearBtn.addEventListener('click', () => {
     // Tale cards out of the DOM
     cardsContainer.innerHTML = '';
     window.location.reload();
+});
+
+// Delete single card button
+deleteBtn.addEventListener('click', () => {
+    let cards;
+    if (localStorage.getItem('cards') === null) {
+        cards = [];
+    } else {
+        cards = JSON.parse(localStorage.getItem('cards'));
+    }
+
+    cards.forEach((card, index) => {
+        if(index === currentActiveCard){
+            cards.splice(index, 1);
+        }
+    });
+
+    // Set cards arr to local storage
+    setCardsData(cards);
 });
 
