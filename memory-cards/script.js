@@ -17,7 +17,7 @@ let currentActiveCard = 0;
 const cardsEl = [];
 
 // Store card data (in local storage)
-const cardsData = getCardsData(); // Returns an arr or empty arr 
+let cardsData = getCardsData(); // Returns an arr or empty arr 
 
 // Store hard-coded card data - Will eventually be from local storage
 /*
@@ -58,17 +58,11 @@ function createCard(data, index) {
                 <p>
                     ${data.question}
                 </p>
-                <button id="delete" class="btn btn-small">
-                    <i class="fas fa-trash"></i> Delete Card
-                </button>
             </div>
             <div class="inner-card-back">
                 <p>
                     ${data.answer}
                 </p>
-                <button id="delete" class="btn btn-small">
-                    <i class="fas fa-trash"></i> Delete Card
-                </button>
             </div>
         </div>
     `;
@@ -102,6 +96,7 @@ function setCardsData(cards) {
     localStorage.setItem('cards', JSON.stringify(cards));
     window.location.reload();
 }
+
 
 createCards();
 
