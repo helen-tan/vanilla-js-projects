@@ -175,3 +175,12 @@ addCardBtn.addEventListener('click', () => {
     }
 });
 
+// Clear cards button
+clearBtn.addEventListener('click', () => {
+    localStorage.clear();
+
+    // Tale cards out of the DOM
+    cardsContainer.innerHTML = '';
+    window.location.reload();
+});
+
