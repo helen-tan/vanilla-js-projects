@@ -190,4 +190,15 @@ h1 button {
     max-width: 100%;
 }
 
+.inner-card-front #delete {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.inner-card-back #delete {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
 

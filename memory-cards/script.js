@@ -48,27 +48,33 @@ function createCard(data, index) {
     card.classList.add('card');
 
     // Add the 'active' class to the 1st card
-    if(index === 0){
+    if (index === 0) {
         card.classList.add('active');
     }
 
     card.innerHTML = `
         <div class="inner-card">
-        <div class="inner-card-front">
-            <p>
-                ${data.question}
-            </p>
-        </div>
-        <div class="inner-card-back">
-            <p>
-                ${data.answer}
-            </p>
-        </div>
+            <div class="inner-card-front">
+                <p>
+                    ${data.question}
+                </p>
+                <button id="delete" class="btn btn-small">
+                    <i class="fas fa-trash"></i> Delete Card
+                </button>
+            </div>
+            <div class="inner-card-back">
+                <p>
+                    ${data.answer}
+                </p>
+                <button id="delete" class="btn btn-small">
+                    <i class="fas fa-trash"></i> Delete Card
+                </button>
+            </div>
         </div>
     `;
 
     // Flip card effect
-    card.addEventListener('click', () => 
+    card.addEventListener('click', () =>
         card.classList.toggle('show-answer')
     );
 
@@ -82,7 +88,7 @@ function createCard(data, index) {
 
 // Show card page number
 function updateCurrentText() {
-    currentEl.innerText = `${currentActiveCard + 1 }/${cardsEl.length}`;
+    currentEl.innerText = `${currentActiveCard + 1}/${cardsEl.length}`;
 }
 
 // Get cards from local storage
@@ -110,7 +116,7 @@ nextBtn.addEventListener('click', () => {
     currentActiveCard = currentActiveCard + 1;
 
     // When the cards are flipped to the end
-    if(currentActiveCard > cardsEl.length - 1) {
+    if (currentActiveCard > cardsEl.length - 1) {
         currentActiveCard = cardsEl.length - 1;
     }
 
@@ -128,7 +134,7 @@ prevBtn.addEventListener('click', () => {
     currentActiveCard = currentActiveCard - 1;
 
     // When the cards are flipped to the end
-    if(currentActiveCard < 0) {
+    if (currentActiveCard < 0) {
         currentActiveCard = 0;
     }
 
@@ -153,11 +159,13 @@ hideBtn.addEventListener('click', () => {
 addCardBtn.addEventListener('click', () => {
     const question = questionEl.value;
     const answer = answerEl.value;
-    
-    if(question.trim() && answer.trim()) {
+
+    if (question.trim() && answer.trim()) {
         // Create new card object
-        const newCard = { question: question, 
-                          answer: answer };
+        const newCard = {
+            question: question,
+            answer: answer
+        };
         // Same as: { question, answer }
 
         createCard(newCard);
@@ -165,7 +173,7 @@ addCardBtn.addEventListener('click', () => {
         // Clear inputs
         questionEl.value = '';
         answerEl.value = '';
-        
+
         // Remove add card container
         addContainer.classList.remove('show');
 
