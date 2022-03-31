@@ -50,8 +50,8 @@ function showSongs(data) {
         // If prev or next button exist, output it
         if(data.prev || data.next) {
             more.innerHTML = `
-                ${data.prev ? `<button class="btn" onclick="getMoreSongs('${data.prev}')">Prev</button>` : ''}
-                ${data.next ? `<button class="btn" onclick="getMoreSongs('${data.next}')">Next</button>` : ''}
+                ${data.prev ? `<button class="btn" onclick='getMoreSongs('${data.prev}')'>Prev</button>` : ''}
+                ${data.next ? `<button class="btn" onclick='getMoreSongs('${data.next}')'>Next</button>` : ''}
             `;
         } else {
             more.innerHTML = '';
@@ -70,6 +70,22 @@ async function getMoreSongs(url) {
     // A way around this is to use a proxy - Heroku has a CORS proxy - CORS Anywhere
 }
 
+// Get Lyrics
+async function getLyrics(artist, songTitle) {
+    const res = await fetch(`${apiURL}/v1/${artist}/${songTitle}`);
+    const data = await res.json();
+
+    // Replace \r & \n chars with <br>
+    const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>'); 
+    
+    result.innerHTML = `
+        <h2><strong>${artist}</strong> - ${songTitle}</h2>
+        <span>${lyrics}</span>
+    `;
+
+    more.innerHTML = '';
+}
+
 // Event Listeners
 form.addEventListener('submit', e => {
     e.preventDefault(); // For a submit event, this prevents it from actually submitting to file
@@ -84,3 +100,15 @@ form.addEventListener('submit', e => {
     }
 });
 
+
+// Get lyrics button click (Event delegation)
+result.addEventListener('click', e => {
+    const clickedEl = e.target;
+
+    if(clickedEl.tagName === 'BUTTON'){
+        const artist = clickedEl.getAttribute('data-artist');
+        const songTitle = clickedEl.getAttribute('data-songtitle');
+
+        getLyrics(artist, songTitle);
+    }
+});
