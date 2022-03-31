@@ -15,7 +15,37 @@ async function searchSongs(term) {
 
 // Show songs and artists in DOM
 function showSongs(data) {
-    
+    /*
+    let output = '';
+
+    data.data.forEach(song => {
+        output += `
+            <li>
+                <span><strong>${song.artist.name}</strong> - ${song.title}</span>
+                <button class="btn" data-artist="${song.artist.name}" data-songtitle="${song.title}">Get Lyrics</button>
+            </li>
+        `;
+    });
+
+    result.innerHTML = `
+        <ul class="songs">
+            ${output}
+        </ul>
+    `;
+    */
+
+    // Other way - Use map. Shorter and cleaner
+    result.innerHTML = `
+        <ul class="songs">
+            ${data.data.map(song => `
+                <li>
+                    <span><strong>${song.artist.name}</strong> - ${song.title}</span>
+                    <button class="btn" data-artist="${song.artist.name}" data-songtitle="${song.title}">Get Lyrics</button>
+                </li>
+            `)
+            .join('')
+            }
+        </ul>`;
 }
 
 // Event Listeners
@@ -25,7 +55,7 @@ form.addEventListener('submit', e => {
     const searchTerm = search.value.trim();
 
     // Validation: Check if something was entered
-    if(!searchTerm) {
+    if (!searchTerm) {
         alert('Please type in a search term');
     } else {
         searchSongs(searchTerm);
