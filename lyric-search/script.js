@@ -46,6 +46,28 @@ function showSongs(data) {
             .join('')
             }
         </ul>`;
+
+        // If prev or next button exist, output it
+        if(data.prev || data.next) {
+            more.innerHTML = `
+                ${data.prev ? `<button class="btn" onclick="getMoreSongs('${data.prev}')">Prev</button>` : ''}
+                ${data.next ? `<button class="btn" onclick="getMoreSongs('${data.next}')">Next</button>` : ''}
+            `;
+        } else {
+            more.innerHTML = '';
+        }
+}
+
+// Get prev and next songs
+async function getMoreSongs(url) {
+    const res = await fetch(`https://cors-anywhere.herokuapp.com/${url}`);
+    const data = await res.json();
+
+    showSongs(data);
+    // Without CORS Anywhere - Will give a CORS error - about cross domain access to a server
+    // Every API has different CORS policies
+    // closed - have to be on the same domain to access the data
+    // A way around this is to use a proxy - Heroku has a CORS proxy - CORS Anywhere
 }
 
 // Event Listeners
