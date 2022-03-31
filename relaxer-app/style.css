@@ -84,3 +84,31 @@ body {
         transform: rotate(360deg);
     }
 }
+
+.container.grow { /*'grow' class will by dynamically added with JS'*/
+    animation: grow 3s linear forwards
+} 
+
+@keyframes grow {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.2);
+    }
+}
+
+.container.shrink { /*'shrink' class will by dynamically added with JS'*/
+    animation: shrink 3s linear forwards
+} 
+
+@keyframes shrink {
+    from {
+        transform: scale(1.2);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
