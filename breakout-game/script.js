@@ -125,6 +125,21 @@ function moveBall() {
         ball.y + ball.size > paddle.y){
             ball.dy = -ball.speed;
     }
+
+    // Brick collision
+    bricks.forEach(column => {
+        column.forEach(brick => {
+            if(brick.visible){
+                if(ball.x - ball.size > brick.x &&             // brick left side check
+                    ball.x + ball.size < brick.x + brick.w &&  // brick right side check
+                    ball.y + ball.size > brick.y &&            // brick top check
+                    ball.y - ball.size < brick.y + brick.h) {  // brick bottom check
+                        ball.dy *= -1;         // Change ball direction
+                        brick.visible = false; // Make brick invisble on collision
+                }
+            }
+        });
+    });
 }
 
 // Draw everything into DOM
