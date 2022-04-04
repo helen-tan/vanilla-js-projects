@@ -52,7 +52,8 @@ h1 {
 }
 
 .countdown {
-    display: flex;
+    /*display: flex;*/
+    display: none; /*Display will be set to flex after setTimeout 1s*/
     transform: scale(2);
 }
 
