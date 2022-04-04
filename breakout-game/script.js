@@ -103,6 +103,30 @@ function movePaddle() {
     }
 }
 
+// Move ball on canvas
+function moveBall() {
+    ball.x += ball.dx;
+    ball.y += ball.dy;
+
+    // Wall collision (x-axis: left & right walls)
+    if(ball.x + ball.size > canvas.width || ball.x - ball.size < 0) {
+        // Reverse direction
+        ball.dx *= -1; // ball.dx = ball.dx * -1
+    }
+
+    // Wall collision (y-axis: top & bottom walls)
+    if(ball.y + ball.size > canvas.height || ball.y - ball.size < 0) {
+        ball.dy *= -1;
+    }
+
+    // Paddle collision
+    if(ball.x - ball.size > paddle.x &&              // check left
+        ball.x + ball.size < paddle.x + paddle.w &&  // check right
+        ball.y + ball.size > paddle.y){
+            ball.dy = -ball.speed;
+    }
+}
+
 // Draw everything into DOM
 function draw() {
     // clear canvas first
@@ -117,6 +141,7 @@ function draw() {
 // Update canvas drawing and animation
 function update(){
     movePaddle();
+    moveBall();
 
     // Draw everything 
     draw();
