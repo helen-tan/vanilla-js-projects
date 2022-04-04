@@ -136,10 +136,39 @@ function moveBall() {
                     ball.y - ball.size < brick.y + brick.h) {  // brick bottom check
                         ball.dy *= -1;         // Change ball direction
                         brick.visible = false; // Make brick invisble on collision
+
+                        // increase score
+                        increaseScore();
                 }
             }
         });
     });
+
+    // Hit bottom wall - Lose
+    if(ball.y + ball.size > canvas.height) {
+        showAllBricks();
+        score = 0;
+    } 
+}
+
+
+// Increase score
+function increaseScore() {
+    score++;
+
+    // Check to see if there are any bricks left
+    if(score % (brickRowCount * brickRowCount) === 0) {
+        showAllBricks();
+    }
+}
+
+// Make all bricks appear
+function showAllBricks() {
+    bricks.forEach(column => {
+        column.forEach(brick => {
+            brick.visible = true;
+        })
+    })
 }
 
 // Draw everything into DOM
