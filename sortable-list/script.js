@@ -24,7 +24,11 @@ createList();
 // Insert list items into DOM
 function createList() {
     [...richestPeople]
-        .forEach((person, index) => {
+    .map(a => ({ value: a, sort: Math.random() }))   // turns arr into an arr of objects
+    .sort((a, b) => a.sort - b.sort)    // Sorts/orders the arr by the random 'sort' valueb (Scrambles list items)
+    .map(a => a.value) // Turn arr into just their 'value' - the name (aldy in their scrambled positions)
+    .forEach((person, index) => {
+            // console.log(person);
             const listItem = document.createElement('li');
 
             listItem.setAttribute('data-index', index);
